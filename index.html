@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>股票回本成本記錄器</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="shell">
+    <section id="auth-view" class="card auth-card">
+      <p class="eyebrow">個人投資紀錄</p>
+      <h1>股票回本成本記錄器</h1>
+      <p class="muted">輸入 Email，登入連結會寄到你的信箱。</p>
+      <form id="login-form" class="stack">
+        <label>Email<input id="email" type="email" autocomplete="email" required placeholder="you@example.com"></label>
+        <button>寄送登入連結</button>
+      </form>
+      <p id="auth-message" class="message" role="status"></p>
+    </section>
+
+    <section id="app-view" hidden>
+      <header class="topbar">
+        <div><p class="eyebrow">個人投資紀錄</p><h1>股票回本成本記錄器</h1></div>
+        <button id="signout" class="secondary">登出</button>
+      </header>
+
+      <nav id="tabs" class="tabs" aria-label="股票頁籤"></nav>
+
+      <section class="card add-stock">
+        <h2>建立原有持股</h2>
+        <form id="opening-form" class="form-grid opening-grid">
+          <label>股票名稱／代號<input id="opening-name" required placeholder="例如：2330 或 台積電"></label>
+          <label>原有股數<input id="opening-shares" type="number" min="1" step="1" required></label>
+          <label>原有總成本<input id="opening-cost" type="number" min="0" step="0.01" required></label>
+          <button>建立股票頁籤</button>
+        </form>
+      </section>
+
+      <section id="stock-panel" class="card" hidden>
+        <div class="section-head"><h2 id="stock-title"></h2><button id="delete-stock" class="danger-text">刪除股票頁籤</button></div>
+        <form id="transaction-form" class="form-grid transaction-grid">
+          <label>交易日期<input id="trade-date" type="date" required></label>
+          <label>類型<select id="trade-type"><option value="buy">買入</option><option value="sell">賣出</option></select></label>
+          <label>股數<input id="trade-shares" type="number" min="1" step="1" required></label>
+          <label>每股成交價<input id="trade-price" type="number" min="0" step="0.01" required></label>
+          <button>新增紀錄</button>
+        </form>
+        <p id="app-message" class="message" role="status"></p>
+        <div class="table-wrap"><table><thead><tr><th>日期</th><th>類型</th><th>股數</th><th>成交價</th><th>交易金額</th><th></th></tr></thead><tbody id="records"></tbody></table></div>
+        <div class="summary">
+          <div><span>目前持有股數</span><strong id="held">0 股</strong></div>
+          <div><span>回本平均成本</span><strong id="breakeven">—</strong></div>
+          <div><span>累積淨投入成本</span><strong id="net-cost">NT$ 0</strong></div>
+        </div>
+      </section>
+      <p id="empty-state" class="empty">先建立一檔原有持股，即可開始記錄買賣。</p>
+    </section>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
