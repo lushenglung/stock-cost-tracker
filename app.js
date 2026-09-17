@@ -78,7 +78,7 @@ $('#login-form').onsubmit = async event => {
   event.preventDefault();
   if (!configured) return;
   const email = $('#email').value.trim();
-  const { error } = await supabase.auth.signInWithOtp({ email, options: { emailRedirectTo: window.location.origin } });
+  const { error } = await supabase.auth.signInWithOtp({ email, options: { emailRedirectTo: window.location.href } });
   $('#auth-message').textContent = error ? error.message : '登入連結已寄出，請到信箱開啟。';
 };
 $('#signout').onclick = () => supabase.auth.signOut();
